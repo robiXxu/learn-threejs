@@ -82,9 +82,14 @@ const pLights = new Array(2).fill(0).map((_,i) => {
   const light = new THREE.PointLight(0x0040FF, 1, rndDistance);
   const pos = i*i+1;
   light.position.set(pos, pos, pos);
-  scene.add(light);
+  // scene.add(light);
   return light;
-})
+});
+
+
+const dLight = new THREE.DirectionalLight(0xFFFFFF, 1);
+dLight.position.set(1,1,1);
+scene.add(dLight);
 
 
 // logic
@@ -96,9 +101,9 @@ const update = () => {
     l.position.z = Math.cos(time * 0.3) * 30;
   })
 
-    //  cube.rotation.x += 0.01;
-     cube.rotation.y += 0.01;
-  //    cube.rotation.z += 0.01;
+  // cube.rotation.x += 0.01;
+  // cube.rotation.y += 0.01;
+  // cube.rotation.z += 0.01;
 };
 
 // draw scene
