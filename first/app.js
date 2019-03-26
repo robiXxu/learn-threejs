@@ -89,8 +89,16 @@ const pLights = new Array(2).fill(0).map((_,i) => {
 
 const dLight = new THREE.DirectionalLight(0xFFFFFF, 1);
 dLight.position.set(1,1,1);
-scene.add(dLight);
+// scene.add(dLight);
 
+
+const spotLight = new THREE.SpotLight(0xFF33FF, 25);
+spotLight.position.set(0,0,1);
+scene.add(spotLight);
+
+
+const axis = new THREE.AxisHelper();
+scene.add(axis);
 
 // logic
 const update = () => {
@@ -99,10 +107,10 @@ const update = () => {
     l.position.x = Math.sin(time * 0.7) * 30;
     l.position.y = Math.cos(time * 0.5) * 30;
     l.position.z = Math.cos(time * 0.3) * 30;
-  })
+  });
 
   // cube.rotation.x += 0.01;
-  // cube.rotation.y += 0.01;
+  cube.rotation.y += 0.01;
   // cube.rotation.z += 0.01;
 };
 
