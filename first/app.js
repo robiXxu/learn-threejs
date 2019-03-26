@@ -1,3 +1,4 @@
+/// <reference path="./threejs.d.ts" />
 const fov = 75;
 const browserRatio = window.innerWidth / window.innerHeight;
 const nearClippingPlane = 0.1;
@@ -42,6 +43,9 @@ scene.add(cube);
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 camera.position.z = 3;
+
+
+const ambientLight = new THREE.AmbientLight(0xFFFFFF, 5.0)
 
 // logic
 const update = () => {
