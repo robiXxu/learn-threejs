@@ -21,6 +21,7 @@ const geometry = new THREE.BoxGeometry(1, 1, 1);
 
 const loader = new THREE.CubeTextureLoader();
 loader.setPath('img/');
+
 // RIGHT LEFT TOP BOTTOM FRONT BACK
 const textureCube = loader.load([
   '1.jpg',
@@ -37,15 +38,43 @@ const material = new THREE.MeshBasicMaterial({
   envMap: textureCube
 });
 
-const cube = new THREE.Mesh(geometry, material);
+const mats1 = [
+  new THREE.MeshPhongMaterial({
+    map: new THREE.TextureLoader().load('img/1.jpg'),
+    side: THREE.DoubleSide
+  }),
+  new THREE.MeshLambertMaterial({
+    map: new THREE.TextureLoader().load('img/2.jpg'),
+    side: THREE.DoubleSide
+  }),
+  new THREE.MeshPhongMaterial({
+    map: new THREE.TextureLoader().load('img/3.jpg'),
+    side: THREE.DoubleSide
+  }),
+  new THREE.MeshLambertMaterial({
+    map: new THREE.TextureLoader().load('img/4.jpg'),
+    side: THREE.DoubleSide
+  }),
+  new THREE.MeshPhongMaterial({
+    map: new THREE.TextureLoader().load('img/5.jpg'),
+    side: THREE.DoubleSide
+  }),
+  new THREE.MeshLambertMaterial({
+    map: new THREE.TextureLoader().load('img/6.jpg'),
+    side: THREE.DoubleSide
+  })
+];
+const mat1 = new THREE.MeshFaceMaterial(mats1);
+
+const cube = new THREE.Mesh(geometry, mat1);
 scene.add(cube);
 
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 camera.position.z = 3;
 
-
-const ambientLight = new THREE.AmbientLight(0xFFFFFF, 5.0)
+const ambientLight = new THREE.AmbientLight(0x0066ff, 0.8);
+scene.add(ambientLight);
 
 // logic
 const update = () => {
