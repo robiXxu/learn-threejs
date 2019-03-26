@@ -65,21 +65,39 @@ const mats1 = [
   })
 ];
 const mat1 = new THREE.MeshFaceMaterial(mats1);
+const mat2 = new THREE.MeshLambertMaterial({color: 0xFF00FF})
 
-const cube = new THREE.Mesh(geometry, mat1);
+const cube = new THREE.Mesh(geometry, mat2);
 scene.add(cube);
 
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 camera.position.z = 3;
 
-const ambientLight = new THREE.AmbientLight(0x0066ff, 0.8);
+const ambientLight = new THREE.AmbientLight(0x0066ff, 0.2);
 scene.add(ambientLight);
+
+const pLights = new Array(2).fill(0).map((_,i) => {
+  const rndDistance = (Math.random() * 20) + 50;
+  const light = new THREE.PointLight(0x0040FF, 1, rndDistance);
+  const pos = i*i+1;
+  light.position.set(pos, pos, pos);
+  scene.add(light);
+  return light;
+})
+
 
 // logic
 const update = () => {
-  //    cube.rotation.x += 0.01;
-  //    cube.rotation.y += 0.01;
+  const time = Date.now() * 0.0005;
+  pLights.forEach(l => {
+    l.position.x = Math.sin(time * 0.7) * 30;
+    l.position.y = Math.cos(time * 0.5) * 30;
+    l.position.z = Math.cos(time * 0.3) * 30;
+  })
+
+    //  cube.rotation.x += 0.01;
+     cube.rotation.y += 0.01;
   //    cube.rotation.z += 0.01;
 };
 
